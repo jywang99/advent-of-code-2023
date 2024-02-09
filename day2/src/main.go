@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -112,6 +111,7 @@ func main() {
         g := parseGameLine(line)
         games = append(games, g)
     }
+    file.Close()
 
     validGameNums := make([]int, 0)
     for _, g := range games {
@@ -120,20 +120,20 @@ func main() {
         }
     }
 
-    fmt.Printf("Valid game numbers: %v\n", validGameNums)
-    fmt.Printf("Number of valid games: %d\n", len(validGameNums))
+    log.Printf("Valid game numbers: %v\n", validGameNums)
+    log.Printf("Number of valid games: %d\n", len(validGameNums))
 
     // part 1: sum of valid game numbers
     sum := 0
     for _, n := range validGameNums {
         sum += n
     }
-    fmt.Printf("P1. Sum of valid game numbers: %d\n", sum)
+    log.Printf("P1. Sum of valid game numbers: %d\n", sum)
 
     // part 2: sum of powers
     powerSum := 0
     for _, g := range games {
         powerSum += g.getPower()
     }
-    fmt.Printf("P2. Sum of powers: %d\n", powerSum)
+    log.Printf("P2. Sum of powers: %d\n", powerSum)
 }
